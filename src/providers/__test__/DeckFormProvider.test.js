@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {fireEvent, render, wait} from "@testing-library/react";
+import {fireEvent, render} from "@testing-library/react";
 import {Provider} from "react-redux";
 import {MemoryRouter, Route} from "react-router-dom";
 
@@ -106,8 +106,6 @@ describe('DeckFormProvider', () => {
         };
 
         const {btnRemove, getByText, queryByText, card} = setup(initialState, deck.id);
-
-        await wait(undefined, {timeout: 0});
 
         const once = 1;
 
