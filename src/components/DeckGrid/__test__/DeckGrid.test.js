@@ -1,5 +1,5 @@
 import React from "react";
-import {render, wait} from "@testing-library/react";
+import {render} from "@testing-library/react";
 import DeckGrid from "../DeckGrid";
 import {MemoryRouter, Route} from "react-router-dom";
 import {storeBuilder} from "../../../__mocks__/store-builder";
