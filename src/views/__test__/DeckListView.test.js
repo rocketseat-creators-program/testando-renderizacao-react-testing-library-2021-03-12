@@ -1,5 +1,5 @@
 import React from "react";
-import {fireEvent, render, wait} from "@testing-library/react";
+import {act, fireEvent, render} from "@testing-library/react";
 import DeckListView from "../DeckListView";
 import {Provider} from "react-redux";
 import {MemoryRouter, Route} from "react-router-dom";
@@ -27,11 +27,11 @@ const setup = (props = {}) => {
     const store = storeBuilder(initialState);
 
     const renderResult = render(<Provider store={store}>
-            <MemoryRouter>
-                <Route path={'/'} component={DeckListView}/>
-                <Route path={'/deck/new'} component={DummyComponent}/>
-            </MemoryRouter>
-        </Provider>);
+        <MemoryRouter>
+            <Route path={'/'} component={DeckListView}/>
+            <Route path={'/deck/new'} component={DummyComponent}/>
+        </MemoryRouter>
+    </Provider>);
 
     return {
         ...renderResult,
@@ -57,7 +57,9 @@ describe('DeckListView', () => {
 
         fireEvent.change(input, {target: {value: 'picles'}});
 
-        jest.runAllTimers();
+        act(() => {
+            jest.runAllTimers();
+        })
 
         expect(queryByText('picles')).toBeInTheDocument();
         expect(queryByText('gincobiloba')).not.toBeInTheDocument();
